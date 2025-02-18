@@ -1,0 +1,11 @@
+{% extends 'diary/base.html' %}
+
+{% block content %}
+    <h1>日記を書く</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">投稿する</button>
+    </form>
+    <a href="{% url 'home' %}">戻る</a>
+{% endblock %}

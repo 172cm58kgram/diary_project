@@ -1,0 +1,25 @@
+{% extends 'diary/base.html' %}
+
+{% block content %}
+<h2>タグ: {{ tag.name }} の日記一覧</h2>
+
+<!-- 並び替えのボタン -->
+<form method="GET" action="{% url 'entries_by_tag' tag.name %}">
+    <label>並び替え:</label>
+    <select name="sort" onchange="this.form.submit()">
+        <option value="newest" {% if sort == "newest" %}selected{% endif %}>新しい順</option>
+        <option value="oldest" {% if sort == "oldest" %}selected{% endif %}>古い順</option>
+        <option value="popular" {% if sort == "popular" %}selected{% endif %}>アクセスが多い順</option>
+    </select>
+</form>
+
+<ul>
+    {% for entry in entries %}
+        <li>
+            <a href="{% url 'entry_detail' entry.pk %}">{{ entry.title }}</a> - {{ entry.date }} (閲覧: {{ entry.views_count }}回)
+        </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'tag_list' %}">タグ一覧に戻る</a>
+{% endblock %}

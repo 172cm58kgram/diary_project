@@ -1,0 +1,12 @@
+{% extends 'diary/base.html' %}
+
+{% block content %}
+    <h1>日記を削除</h1>
+    <p>本当に "{{ entry.title }}" を削除してもよろしいですか？</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">削除する</button>
+    </form>
+    <a href="{% url 'entry_detail' entry.pk %}">キャンセル</a>
+{% endblock %}

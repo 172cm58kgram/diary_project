@@ -1,0 +1,29 @@
+{% extends 'diary/base.html' %}
+
+{% block content %}
+    <h1>新しい日記を書く</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label for="id_title">タイトル:</label>
+        {{ form.title }}  <!-- タイトル入力フィールドを追加 -->
+
+        <label for="id_date">日付:</label>
+        {{ form.date }}  <!-- 日付選択フィールドを表示 -->
+
+        <label for="id_content">内容:</label>
+        {{ form.content }}
+
+        <label for="id_image">画像:</label>
+        {{ form.image }}
+
+        <label for="id_tags">タグ (最大20個まで選択可):</label>
+        {{ form.tags }}
+
+        <label for="id_new_tag">新しいタグを追加 (カンマで区切って入力)</label>
+        <input type="text" name="new_tag" id="id_new_tag" placeholder="例: 旅行, 日記, 猫" class="form-control">
+
+        <button type="submit">投稿する</button>
+    </form>
+    <a href="{% url 'home' %}">ホームへ戻る</a>
+{% endblock %}

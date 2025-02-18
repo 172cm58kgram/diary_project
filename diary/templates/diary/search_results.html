@@ -1,0 +1,19 @@
+{% extends 'diary/base.html' %}
+
+{% block content %}
+    <h1>タグ「{{ tag.name }}」の日記</h1>
+
+    {% if diary_entries %}
+        <ul>
+            {% for entry in diary_entries %}
+                <li>
+                    <a href="{% url 'entry_detail' entry.id %}">{{ entry.title }}</a> - {{ entry.date }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>該当する日記はありません。</p>
+    {% endif %}
+
+    <a href="{% url 'home' %}">ホームへ戻る</a>
+{% endblock %}

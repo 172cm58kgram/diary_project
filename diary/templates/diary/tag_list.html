@@ -1,0 +1,14 @@
+{% extends 'diary/base.html' %}
+
+{% block content %}
+<h2>タグ一覧</h2>
+<a href="{% url 'search_by_tags' %}">🔍 タグ検索</a>
+
+<ul>
+    {% for tag in tags %}
+        <li><a href="{% url 'search_by_tags' %}?query={{ tag.name }}">{{ tag.name }}</a></li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'home' %}">戻る</a>
+{% endblock %}

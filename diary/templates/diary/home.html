@@ -1,0 +1,45 @@
+{% extends 'diary/base.html' %}
+
+{% block content %}
+    <div class="site-header">
+        <h1 class="site-title">いっきの日記</h1>
+        <h2 class="site-subtitle">平均身長普通体重の一般男性の日記</h2>
+
+        <!-- SNSリンクボタン -->
+        <div class="social-links">
+            <a href="https://www.instagram.com/172cm58kgram" target="_blank" class="instagram-button">📷 Instagram</a>
+            <a href="https://www.tiktok.com/@sixtones_sme" target="_blank" class="tiktok-button">🎵 TikTok</a>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <a href="{% url 'calendar' %}">📅 カレンダー</a>
+        <a href="{% url 'tag_list' %}">🔍 タグ検索</a>
+    </div>
+
+    {% if user.is_authenticated %}
+        <p class="login-status">ログイン中: {{ user.username }} (<a href="{% url 'logout' %}">ログアウト</a>)</p>
+        <a href="{% url 'new_entry' %}" class="write-diary-button">📖 日記を書く</a>
+    {% else %}
+        <p class="login-status"><a href="{% url 'login' %}">ログイン</a> してください</p>
+    {% endif %}
+
+    <h2 class="date-heading">{{ selected_date }} の日記</h2>
+
+    {% if entries %}
+        <ul class="entry-list">
+            {% for entry in entries %}
+                <li>
+                    <h3>
+                        <a href="{% url 'entry_detail' entry.id %}" class="entry-title">
+                            📝 {{ entry.title }}
+                        </a>
+                    </h3>
+                    <p>{{ entry.content|truncatechars:50 }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>まだ日記が投稿されていません。</p>
+    {% endif %}
+{% endblock %}

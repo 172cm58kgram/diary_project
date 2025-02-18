@@ -1,0 +1,26 @@
+{% extends 'diary/base.html' %}
+
+{% block content %}
+    <h1>日記を編集</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <!-- 既存のタグを削除するチェックボックス -->
+        <h3>現在のタグ</h3>
+        {% for tag in existing_tags %}
+            <label>
+                <input type="checkbox" name="remove_tags" value="{{ tag.id }}">
+                {{ tag.name }}（削除）
+            </label>
+            <br>
+        {% endfor %}
+
+        <!-- 新しいタグを追加するフォーム -->
+        <label for="id_new_tag">新しいタグを追加 (カンマで区切って入力)</label>
+        <input type="text" name="new_tag" id="id_new_tag" placeholder="例: 旅行, 日記, 猫" class="form-control">
+        
+        <button type="submit">更新する</button>
+    </form>
+    <a href="{% url 'entry_detail' entry.pk %}">キャンセル</a>
+{% endblock %}

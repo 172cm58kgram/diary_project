@@ -1,0 +1,25 @@
+{% extends 'diary/base.html' %}
+
+{% block content %}
+    <h1>{{ entry.title }}</h1>
+    <p>投稿日: {{ entry.date }}</p>
+    <p>{{ entry.content }}</p>
+
+    {% if entry.image %}
+        <img src="{{ entry.image.url }}" alt="日記画像" width="300">
+    {% endif %}
+
+    <h3>タグ:</h3>
+    <ul>
+        {% for tag in entry.tags.all %}
+            <li>{{ tag.name }}</li>
+        {% endfor %}
+    </ul>
+
+    {% if user == entry.user %}
+        <a href="{% url 'edit_entry' entry.pk %}">✏️ 編集</a>
+        <a href="{% url 'delete_entry' entry.pk %}" style="color: red;">🗑 削除</a>
+    {% endif %}
+
+    <a href="{% url 'home' %}?date={{ entry.date }}">戻る</a>
+{% endblock %}

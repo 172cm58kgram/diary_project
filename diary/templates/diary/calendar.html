@@ -1,0 +1,23 @@
+{% extends 'diary/base.html' %}
+
+{% block content %}
+    <h1>{{ year }}年{{ month }}月</h1>
+    <table border="1">
+        {% for week in month_days %}
+            <tr>
+                {% for day in week %}
+                    <td>
+                        {% if day %}
+                            <a href="{% url 'home' %}?date={{ year }}-{{ month }}-{{ day }}">{{ day }}</a>
+                            {% if day in entries_by_day %}
+                                <br>
+                                <small>{{ entries_by_day.day.content|truncatechars:10 }}</small>
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'home' %}">戻る</a>
+{% endblock %}
