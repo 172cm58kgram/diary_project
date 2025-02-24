@@ -31,8 +31,9 @@ SECRET_KEY = 'django-insecure-@0f9x)-_jh+4g+^*!886@@g9f_kf@x=_@*s@06!mianj$pb*1n
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "127.0.0.1",  # ローカル環境
-    "ikki.diary.ngrok.app",  # ngrokのカスタムドメイン
+    'diary-project-be15.onrender.com', '127.0.0.1'
+    # "127.0.0.1",  # ローカル環境
+    # "ikki.diary.ngrok.app",  # ngrokのカスタムドメイン
 ]
 
 CSRF_TRUSTED_ORIGINS = [
